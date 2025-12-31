@@ -11,3 +11,26 @@ jobs:
         run: ci/build-app.sh
       - name: Run Unit Tests
         run: ci/unit-test-app.sh
+      - name: Upload repo (after build)
+        uses: actions/upload-artifact@v4
+        with:
+          name: code
+          path: .
+          include-hidden-files: true
+  Linting:
+    runs-on: ubuntu-latest
+    needs: [Build]
+      steps: 
+        - name: Download code
+          uses: actions/download-artifact@v4
+          with:
+            name: code
+            path: .
+        - name: Run Linting
+          uses: super-linter/super-linter/slim@v7
+          env:
+            DEFAULT_BRANCH: main
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+
+
