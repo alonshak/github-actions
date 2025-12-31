@@ -50,10 +50,10 @@ jobs:
           path: .
 
       - name: Build Docker
-        run: ci/build-docker.sh
-        
+        run: bash ci/build-docker.sh
+
       - name: Push Docker
-        run: ci/push-docker.sh
+        run: bash ci/push-docker.sh
 
 
 
